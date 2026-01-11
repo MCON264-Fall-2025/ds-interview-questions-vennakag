@@ -37,7 +37,7 @@ public class Solution {
                     token.append(expressionCharacters[i]);
                 }else if (expressionCharacters[i] == '+' || expressionCharacters[i] == '-'
                         || expressionCharacters[i] == '/' || expressionCharacters[i] == '*') {
-                    if(!operatorStack.isEmpty()&&operand(operatorStack.peek()) >= operand(expressionCharacters[i])){
+                    while(!operatorStack.isEmpty() && operand(operatorStack.peek()) >= operand(expressionCharacters[i])){
                         token.append(operatorStack.pop());
                     }
                     operatorStack.push(expressionCharacters[i]);

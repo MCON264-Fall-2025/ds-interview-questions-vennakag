@@ -13,7 +13,7 @@ public class Solution {
     }
 
     
-    public int operand(char expChar){
+    public int operandPrecedence(char expChar){
         switch (expChar) {
             case '+':
             case '-':
@@ -37,7 +37,7 @@ public class Solution {
                     token.append(expressionCharacters[i]);
                 }else if (expressionCharacters[i] == '+' || expressionCharacters[i] == '-'
                         || expressionCharacters[i] == '/' || expressionCharacters[i] == '*') {
-                    if(!operatorStack.isEmpty()&&operand(operatorStack.peek()) >= operand(expressionCharacters[i])){
+                    if(!operatorStack.isEmpty()&& operandPrecedence(operatorStack.peek()) >= operandPrecedence(expressionCharacters[i])){
                         token.append(operatorStack.pop());
                     }
                     operatorStack.push(expressionCharacters[i]);

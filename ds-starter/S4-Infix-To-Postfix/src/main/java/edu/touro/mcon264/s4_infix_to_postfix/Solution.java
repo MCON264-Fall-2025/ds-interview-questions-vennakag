@@ -4,8 +4,6 @@ import java.util.Stack;
 
 public class Solution {
     // TODO: Implement solution for: Infix → Postfix + Evaluate
-    private StringBuilder token = new StringBuilder();
-    Stack<Character> operatorStack = new Stack<>();
     private String expression;
 
     public Solution(String expression){
@@ -27,6 +25,8 @@ public class Solution {
     }
 
     public String infix_to_postfix(){
+        StringBuilder token = new StringBuilder();
+        Stack<Character> operatorStack = new Stack<>();
         if(expression==null){
             throw new IllegalStateException("Expression is missing");
         }else{
@@ -37,11 +37,7 @@ public class Solution {
                     token.append(expressionCharacters[i]);
                 }else if (expressionCharacters[i] == '+' || expressionCharacters[i] == '-'
                         || expressionCharacters[i] == '/' || expressionCharacters[i] == '*') {
-<<<<<<< HEAD
                     if(!operatorStack.isEmpty()&& operandPrecedence(operatorStack.peek()) >= operandPrecedence(expressionCharacters[i])){
-=======
-                    while(!operatorStack.isEmpty() && operand(operatorStack.peek()) >= operand(expressionCharacters[i])){
->>>>>>> 7774216abcf88310ba0a811becee0356ecb8deb0
                         token.append(operatorStack.pop());
                     }
                     operatorStack.push(expressionCharacters[i]);
@@ -65,16 +61,28 @@ public class Solution {
                     s.push(tokens[i] - '0');
                 }else{
                     if(tokens[i]=='+'){
-                      s.push(s.pop()+s.pop()) ;
+                        if (s.size() < 2) {
+                            throw new IllegalArgumentException("Malformed postfix expression: not enough operands for '+'");
+                        }
+                        s.push(s.pop() + s.pop());
                     }else if(tokens[i]=='-'){
+                        if (s.size() < 2) {
+                            throw new IllegalArgumentException("Malformed postfix expression: not enough operands for '-'");
+                        }
                         int b = s.pop();
                         int a = s.pop();
                         s.push(a-b) ;
                     }else if(tokens[i]=='/'){
+                        if (s.size() < 2) {
+                            throw new IllegalArgumentException("Malformed postfix expression: not enough operands for '/'");
+                        }
                         int b = s.pop();
                         int a = s.pop();
                         s.push(a/b) ;
                     }else if(tokens[i]=='*'){
+                        if (s.size() < 2) {
+                            throw new IllegalArgumentException("Malformed postfix expression: not enough operands for '*'");
+                        }
                         s.push(s.pop()*s.pop()) ;
                     }
                 }

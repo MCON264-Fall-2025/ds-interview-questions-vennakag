@@ -8,8 +8,8 @@ class SolutionTest {
     void testInfix_to_postfix() {
         // TODO: Add tests for Infix → Postfix + Evaluate
         Solution s = new Solution("3+9+5");
-        assertEquals("39+5+", s.infix_to_postfix());
-        assertEquals(17, s.evaluate_postfix(s.infix_to_postfix()));
+        String postfix = s.infix_to_postfix();
+        assertEquals("39+5+", postfix);
+        assertEquals(17, s.evaluate_postfix(postfix));
         }
-
 }
